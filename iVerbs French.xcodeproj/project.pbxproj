@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A2A1A2AD1B2B01AA006E26C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */; };
+		A2A1A2AF1B2B01AA006E26C6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2AE1B2B01AA006E26C6 /* MasterViewController.swift */; };
+		A2A1A2B11B2B01AA006E26C6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2B01B2B01AA006E26C6 /* DetailViewController.swift */; };
+		A2A1A2B41B2B01AA006E26C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A1A2B21B2B01AA006E26C6 /* Main.storyboard */; };
+		A2A1A2B61B2B01AA006E26C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A1A2B51B2B01AA006E26C6 /* Assets.xcassets */; };
+		A2A1A2B91B2B01AA006E26C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A1A2B71B2B01AA006E26C6 /* LaunchScreen.storyboard */; };
+		A2A1A2C41B2B01AA006E26C6 /* iVerbs_FrenchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2C31B2B01AA006E26C6 /* iVerbs_FrenchTests.swift */; };
+		A2A1A2CF1B2B01AA006E26C6 /* iVerbs_FrenchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2CE1B2B01AA006E26C6 /* iVerbs_FrenchUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2A1A2C01B2B01AA006E26C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2A1A2A11B2B01AA006E26C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2A1A2A81B2B01AA006E26C6;
+			remoteInfo = "iVerbs French";
+		};
+		A2A1A2CB1B2B01AA006E26C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2A1A2A11B2B01AA006E26C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A2A1A2A81B2B01AA006E26C6;
+			remoteInfo = "iVerbs French";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A2A1A2A91B2B01AA006E26C6 /* iVerbs French.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iVerbs French.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A2A1A2AE1B2B01AA006E26C6 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		A2A1A2B01B2B01AA006E26C6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A2A1A2B31B2B01AA006E26C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A2A1A2B51B2B01AA006E26C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2A1A2B81B2B01AA006E26C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A2A1A2BA1B2B01AA006E26C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2A1A2BF1B2B01AA006E26C6 /* iVerbs FrenchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iVerbs FrenchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A1A2C31B2B01AA006E26C6 /* iVerbs_FrenchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iVerbs_FrenchTests.swift; sourceTree = "<group>"; };
+		A2A1A2C51B2B01AA006E26C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2A1A2CA1B2B01AA006E26C6 /* iVerbs FrenchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iVerbs FrenchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2A1A2CE1B2B01AA006E26C6 /* iVerbs_FrenchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iVerbs_FrenchUITests.swift; sourceTree = "<group>"; };
+		A2A1A2D01B2B01AA006E26C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2A1A2A61B2B01AA006E26C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2BC1B2B01AA006E26C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2C71B2B01AA006E26C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A2A1A2A01B2B01AA006E26C6 = {
+			isa = PBXGroup;
+			children = (
+				A2A1A2AB1B2B01AA006E26C6 /* iVerbs French */,
+				A2A1A2C21B2B01AA006E26C6 /* iVerbs FrenchTests */,
+				A2A1A2CD1B2B01AA006E26C6 /* iVerbs FrenchUITests */,
+				A2A1A2AA1B2B01AA006E26C6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A2A1A2AA1B2B01AA006E26C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2A1A2A91B2B01AA006E26C6 /* iVerbs French.app */,
+				A2A1A2BF1B2B01AA006E26C6 /* iVerbs FrenchTests.xctest */,
+				A2A1A2CA1B2B01AA006E26C6 /* iVerbs FrenchUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2A1A2AB1B2B01AA006E26C6 /* iVerbs French */ = {
+			isa = PBXGroup;
+			children = (
+				A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */,
+				A2A1A2AE1B2B01AA006E26C6 /* MasterViewController.swift */,
+				A2A1A2B01B2B01AA006E26C6 /* DetailViewController.swift */,
+				A2A1A2B21B2B01AA006E26C6 /* Main.storyboard */,
+				A2A1A2B51B2B01AA006E26C6 /* Assets.xcassets */,
+				A2A1A2B71B2B01AA006E26C6 /* LaunchScreen.storyboard */,
+				A2A1A2BA1B2B01AA006E26C6 /* Info.plist */,
+			);
+			path = "iVerbs French";
+			sourceTree = "<group>";
+		};
+		A2A1A2C21B2B01AA006E26C6 /* iVerbs FrenchTests */ = {
+			isa = PBXGroup;
+			children = (
+				A2A1A2C31B2B01AA006E26C6 /* iVerbs_FrenchTests.swift */,
+				A2A1A2C51B2B01AA006E26C6 /* Info.plist */,
+			);
+			path = "iVerbs FrenchTests";
+			sourceTree = "<group>";
+		};
+		A2A1A2CD1B2B01AA006E26C6 /* iVerbs FrenchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A2A1A2CE1B2B01AA006E26C6 /* iVerbs_FrenchUITests.swift */,
+				A2A1A2D01B2B01AA006E26C6 /* Info.plist */,
+			);
+			path = "iVerbs FrenchUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2A1A2A81B2B01AA006E26C6 /* iVerbs French */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2A1A2D31B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs French" */;
+			buildPhases = (
+				A2A1A2A51B2B01AA006E26C6 /* Sources */,
+				A2A1A2A61B2B01AA006E26C6 /* Frameworks */,
+				A2A1A2A71B2B01AA006E26C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iVerbs French";
+			productName = "iVerbs French";
+			productReference = A2A1A2A91B2B01AA006E26C6 /* iVerbs French.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A2A1A2BE1B2B01AA006E26C6 /* iVerbs FrenchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2A1A2D61B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs FrenchTests" */;
+			buildPhases = (
+				A2A1A2BB1B2B01AA006E26C6 /* Sources */,
+				A2A1A2BC1B2B01AA006E26C6 /* Frameworks */,
+				A2A1A2BD1B2B01AA006E26C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2A1A2C11B2B01AA006E26C6 /* PBXTargetDependency */,
+			);
+			name = "iVerbs FrenchTests";
+			productName = "iVerbs FrenchTests";
+			productReference = A2A1A2BF1B2B01AA006E26C6 /* iVerbs FrenchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A2A1A2C91B2B01AA006E26C6 /* iVerbs FrenchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2A1A2D91B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs FrenchUITests" */;
+			buildPhases = (
+				A2A1A2C61B2B01AA006E26C6 /* Sources */,
+				A2A1A2C71B2B01AA006E26C6 /* Frameworks */,
+				A2A1A2C81B2B01AA006E26C6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2A1A2CC1B2B01AA006E26C6 /* PBXTargetDependency */,
+			);
+			name = "iVerbs FrenchUITests";
+			productName = "iVerbs FrenchUITests";
+			productReference = A2A1A2CA1B2B01AA006E26C6 /* iVerbs FrenchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2A1A2A11B2B01AA006E26C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Brad Reed";
+				TargetAttributes = {
+					A2A1A2A81B2B01AA006E26C6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					A2A1A2BE1B2B01AA006E26C6 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = A2A1A2A81B2B01AA006E26C6;
+					};
+					A2A1A2C91B2B01AA006E26C6 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = A2A1A2A81B2B01AA006E26C6;
+					};
+				};
+			};
+			buildConfigurationList = A2A1A2A41B2B01AA006E26C6 /* Build configuration list for PBXProject "iVerbs French" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A2A1A2A01B2B01AA006E26C6;
+			productRefGroup = A2A1A2AA1B2B01AA006E26C6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2A1A2A81B2B01AA006E26C6 /* iVerbs French */,
+				A2A1A2BE1B2B01AA006E26C6 /* iVerbs FrenchTests */,
+				A2A1A2C91B2B01AA006E26C6 /* iVerbs FrenchUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A2A1A2A71B2B01AA006E26C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A1A2B91B2B01AA006E26C6 /* LaunchScreen.storyboard in Resources */,
+				A2A1A2B61B2B01AA006E26C6 /* Assets.xcassets in Resources */,
+				A2A1A2B41B2B01AA006E26C6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2BD1B2B01AA006E26C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2C81B2B01AA006E26C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A2A1A2A51B2B01AA006E26C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A1A2B11B2B01AA006E26C6 /* DetailViewController.swift in Sources */,
+				A2A1A2AF1B2B01AA006E26C6 /* MasterViewController.swift in Sources */,
+				A2A1A2AD1B2B01AA006E26C6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2BB1B2B01AA006E26C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A1A2C41B2B01AA006E26C6 /* iVerbs_FrenchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2A1A2C61B2B01AA006E26C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2A1A2CF1B2B01AA006E26C6 /* iVerbs_FrenchUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2A1A2C11B2B01AA006E26C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2A1A2A81B2B01AA006E26C6 /* iVerbs French */;
+			targetProxy = A2A1A2C01B2B01AA006E26C6 /* PBXContainerItemProxy */;
+		};
+		A2A1A2CC1B2B01AA006E26C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A2A1A2A81B2B01AA006E26C6 /* iVerbs French */;
+			targetProxy = A2A1A2CB1B2B01AA006E26C6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A2A1A2B21B2B01AA006E26C6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A2A1A2B31B2B01AA006E26C6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A2A1A2B71B2B01AA006E26C6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A2A1A2B81B2B01AA006E26C6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A2A1A2D11B2B01AA006E26C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A2A1A2D21B2B01AA006E26C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A2A1A2D41B2B01AA006E26C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "iVerbs French/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-French";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A2A1A2D51B2B01AA006E26C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "iVerbs French/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-French";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A2A1A2D71B2B01AA006E26C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iVerbs French.app/iVerbs French";
+			};
+			name = Debug;
+		};
+		A2A1A2D81B2B01AA006E26C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iVerbs French.app/iVerbs French";
+			};
+			name = Release;
+		};
+		A2A1A2DA1B2B01AA006E26C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "iVerbs FrenchUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "iVerbs French";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A2A1A2DB1B2B01AA006E26C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "iVerbs FrenchUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "iVerbs French";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2A1A2A41B2B01AA006E26C6 /* Build configuration list for PBXProject "iVerbs French" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A1A2D11B2B01AA006E26C6 /* Debug */,
+				A2A1A2D21B2B01AA006E26C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2A1A2D31B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs French" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A1A2D41B2B01AA006E26C6 /* Debug */,
+				A2A1A2D51B2B01AA006E26C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A2A1A2D61B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs FrenchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A1A2D71B2B01AA006E26C6 /* Debug */,
+				A2A1A2D81B2B01AA006E26C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A2A1A2D91B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs FrenchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2A1A2DA1B2B01AA006E26C6 /* Debug */,
+				A2A1A2DB1B2B01AA006E26C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2A1A2A11B2B01AA006E26C6 /* Project object */;
+}
