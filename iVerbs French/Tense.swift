@@ -1,6 +1,6 @@
 //
 //  Tense.swift
-//  Realm-Test
+//  iVerbs French
 //
 //  Created by Brad Reed on 30/09/2015.
 //  Copyright © 2015 Brad Reed. All rights reserved.
@@ -12,15 +12,41 @@ import RealmSwift
 class Tense: Object {
     
     dynamic var id = 0
-    dynamic var lang = ""
     dynamic var identifier = ""
     dynamic var displayName = ""
     dynamic var order = 0
     
+    // This should just return one language
+    fileprivate let languages = LinkingObjects(fromType: Language.self, property: "tenses")
+    
     var language: Language {
-        // Realm doesn't persist this property because it only has a getter defined
         // Define "language" as the inverse relationship to Lanuages.Tenses
-        let languages = linkingObjects(Language.self, forProperty: "tenses")
-        return languages[0]
+        return languages.first!
     }
+    
+    // MARK: Initialisation
+    
+    // Initialize Tense with data from API as Dictionary
+    convenience init(dict: NSDictionary) {
+        self.init()
+        
+        self.id = dict.object(forKey: "id") as! Int
+        self.identifier = dict.object(forKey: "identifier") as! String
+        self.displayName = dict.object(forKey: "displayName") as! String
+        self.order = dict.object(forKey: "order") as! Int
+    }
+    
+    // Return a list of Tense objects given a dictionary of info from the API
+    class func tensesWithDict(_ dict: NSDictionary) -> [Tense] {
+        
+        if let data = (dict.object(forKey: "data") as? NSArray) {
+            return data.map { pronoun in
+                return Tense(dict: pronoun as! NSDictionary)
+            }
+        }
+        
+        // If the correct data was not supplied, return an empty array
+        return [Tense]()
+    }
+    
 }

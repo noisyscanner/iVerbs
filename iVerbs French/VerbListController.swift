@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  VerbListController.swift
 //  iVerbs
 //
 //  Created by Brad Reed on 12/06/2015.
@@ -9,22 +9,30 @@
 import UIKit
 import RealmSwift
 import LGSideMenuController
+import NightNight
+
+import GoogleMobileAds
 
 // To identify whether the verb list
 // is being sorted by Infinitive or English form
 enum VerbListOrder {
-    case Infinitive
-    case English
+    case infinitive
+    case english
 }
 
-class MasterViewController: UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating {
+class VerbListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, GADBannerViewDelegate {
+    
+    @IBOutlet weak var bannerViewContainer: UIView!
+    
+    let bannerManager = BannerManager.shared
     
     // Language should always be set before the view appears on screen
     var language: Language? {
         // When the language is set, update the title of the view
         // If the language is not loaded, default to 'iVerbs'
         didSet {
-            self.navigationItem.title = language?.language ?? "iVerbs"
+            // Language.label for emoji support too! ☺️
+            self.navigationItem.title = language?.label ?? "iVerbs"
         }
     }
     
@@ -32,21 +40,24 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     // so we can show and hide the Language List View from this controller
     var delegate: MainVC!
     
+    // Table view
+    @IBOutlet weak var tableView: UITableView!
+    
     // Search controller
     let searchController = UISearchController(searchResultsController: nil)
     
     // This will be populated with search results when the user is searching
     var filteredVerbs: Results<Verb>?
     
-    var order = VerbListOrder.Infinitive // Default order
+    var order = VerbListOrder.infinitive // Default order
     
     // Return true if the user is currently searching, else false
     var userIsSearching: Bool {
-        return searchController.active && searchController.searchBar.text != ""
+        return searchController.isActive && searchController.searchBar.text != ""
     }
     
     // For sectioning the table view
-    let collation = UILocalizedIndexedCollation.currentCollation() as UILocalizedIndexedCollation
+    let collation = UILocalizedIndexedCollation.current() as UILocalizedIndexedCollation
     
     var sections: [Section] {
         // return if already initialized
@@ -59,11 +70,11 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
         }
         
         // Get the sort order
-        let sortSelector = Selector((order == .Infinitive) ? "sortNormalisedInfinitive" : "sortEnglish")
+        let sortSelector = Selector((order == .infinitive) ? "sortNormalisedInfinitive" : "sortEnglish")
         
         // Find each verb's section
         let sortedVerbs: [Verb] = language!.verbs.map { verb in
-            verb.section = self.collation.sectionForObject(verb, collationStringSelector: sortSelector)
+            verb.section = self.collation.section(for: verb, collationStringSelector: sortSelector)
             return verb
         }
         
@@ -79,14 +90,14 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
         }
         
         // sort each section alphabetically
-        sections = sections.enumerate().map { (index, var section) in
-            section.verbs = self.collation.sortedArrayFromArray(section.verbs, collationStringSelector: sortSelector) as! [Verb]
-            section.title = self.collation.sectionTitles[index]
+        _sections = sections.enumerated().map { (index, section) in
+            var newSection = section
+            newSection.verbs = self.collation.sortedArray(from: section.verbs, collationStringSelector: sortSelector) as! [Verb]
+            newSection.title = self.collation.sectionTitles[index]
             
-            return section
+            return newSection
         }
         
-        _sections = sections
         
         // If the user has favourite verbs, show these at the top
         if language!.favouriteVerbs.count > 0 {
@@ -99,20 +110,20 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     var _sections: [Section]?
     
     // Add favourites section to top of table view
-    private func insertFavouritesSection() {
+    fileprivate func insertFavouritesSection() {
         if _sections != nil {
             var favouriteSection = Section()
             favouriteSection.title = "♡"
-            favouriteSection.verbs = Array(language!.favouriteVerbs)
+            favouriteSection.verbs = Array(language!.favouriteVerbs) // TODO: this seems bait
             
-            _sections!.insert(favouriteSection, atIndex: 0)
+            _sections!.insert(favouriteSection, at: 0)
         }
     }
     
     // Initialise with Language
     init(language: Language?) {
         self.language = language
-        super.init(nibName: "SearchController", bundle: NSBundle.mainBundle())
+        super.init(nibName: "SearchController", bundle: Bundle.main)
     }
 
     // Required to implement this
@@ -126,7 +137,19 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Night mode colours
+        let mixedbg = MixedColor(normal: UIColor.groupTableViewBackground, night: iVerbs.Colour.dark)
+        view.mixedBackgroundColor = mixedbg
+        tableView.mixedBackgroundColor = mixedbg
+        tableView.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
+        navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        searchController.searchBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        
+        searchController.searchBar.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
+        
+        
         tableView.tintColor = iVerbs.colour
+        tableView.sectionIndexBackgroundColor = UIColor.black
         
         // Set up search controller
         searchController.searchResultsUpdater = self
@@ -134,18 +157,21 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        reloadLanguage()
+        let _ = bannerManager.setupBannerAds(viewController: self, container: bannerViewContainer)
+        
+        
+//        reloadLanguage()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController?.collapsed ?? true
+    override func viewWillAppear(_ animated: Bool) {
+//        tableView.clearsSelectionOnViewWillAppear = self.splitViewController?.collapsed ?? true
         
         reloadLanguage()
         
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         // If a language hass not been loaded yet...
         if language == nil {
             // If only one language is installed, load that by default
@@ -155,12 +181,12 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
             if installedLangs.count == 1 {
                 loadLanguage(installedLangs.first)
             } else {
-                self.delegate?.showLeftViewAnimated(true, completionHandler: nil)
+                self.delegate?.showLeftView(animated: true, completionHandler: nil)
             }
         }
     }
     
-    func loadLanguage(language: Language?) {
+    func loadLanguage(_ language: Language?) {
         self.language = language
         self.reloadLanguage()
     }
@@ -173,9 +199,9 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     // MARK: IBActions
 
     // Switch the verb list ordering. Order by Infinitive or English translation
-    @IBAction func reorderVerbs(sender: UIBarButtonItem) {
+    @IBAction func reorderVerbs(_ sender: UIBarButtonItem) {
         // Reorder the verb list (flip it, essentially)
-        order = (order == .Infinitive) ? .English : .Infinitive
+        order = (order == .infinitive) ? .english : .infinitive
         
         reloadLanguage()
         
@@ -183,33 +209,28 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     }
 
     // Open the language seletion list by tapping the globe icon
-    @IBAction func didTapGlobe(sender: UIBarButtonItem) {
-        self.delegate.showLeftViewAnimated(true, completionHandler: nil)
-    }
-    
-    // Activate the search bar by tapping the magnifying glass icon
-    @IBAction func didTapSearch(sender: UIBarButtonItem) {
-        searchController.searchBar.becomeFirstResponder()
+    @IBAction func didTapGlobe(_ sender: UIBarButtonItem) {
+        self.delegate.showLeftView(animated: true, completionHandler: nil)
     }
     
 
     // MARK: Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showVerb" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 
                 let verb: Verb
                 if userIsSearching {
-                    verb = filteredVerbs![indexPath.row]
+                    verb = filteredVerbs![(indexPath as NSIndexPath).row]
                 } else {
                     verb = getVerbAtIndexPath(indexPath)
                 }
                 
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! VerbDetailController
                 controller.verb = verb
                 
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
@@ -217,7 +238,7 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if userIsSearching {
             return 1
         }
@@ -225,7 +246,7 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
         return self.sections.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if userIsSearching {
             return filteredVerbs!.count
         }
@@ -234,7 +255,7 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     }
     
     // section headers: appear above each `UITableView` section
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // do not display empty sections
         if !userIsSearching {
             let section = self.sections[section]
@@ -243,20 +264,30 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
             }
         }
         
-        return ""
+        return nil
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let v = view as! UITableViewHeaderFooterView
+        v.backgroundView?.mixedBackgroundColor = MixedColor(normal: UIColor.groupTableViewBackground, night: iVerbs.Colour.darkTable)
+        v.textLabel?.mixedTextColor = MixedColor(normal: UIColor.darkText, night: UIColor.lightText)
+    }
     
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    /*func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }*/
+    
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if userIsSearching {
             return 0
         }
         
-        return self.collation.sectionForSectionIndexTitleAtIndex(index)
+        return self.collation.section(forSectionIndexTitle: index)
     }
     
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if userIsSearching {
             return nil
         }
@@ -265,18 +296,18 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
     }
     
     // Get the cell instance
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("VerbCell", forIndexPath: indexPath) as! VerbListCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VerbCell", for: indexPath) as! VerbListCell
         cell.language = language
 
         let verb: Verb
         if userIsSearching {
-            verb = filteredVerbs![indexPath.row]
+            verb = filteredVerbs![(indexPath as NSIndexPath).row]
         } else {
             verb = getVerbAtIndexPath(indexPath)
         }
 
-        if order == .Infinitive {
+        if order == .infinitive {
             cell.textLabel!.text = verb.infinitive
             cell.detailTextLabel!.text = verb.english
         } else {
@@ -286,40 +317,46 @@ class MasterViewController: UITableViewController, UISearchControllerDelegate, U
         
         return cell
     }
+    
+    // Called when the user taps a verb in the list
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        self.performSegueWithIdentifier("showVerb", sender: self)
+//    }
 
     // Verbs may not be deleted from the list
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
     // Should show menu for 'Speak' and 'Copy' actions
-    override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return (action == Selector("copy:") || action == Selector("speak:"))
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return (action == #selector(SpeakingCell.copy(_:)) || action == #selector(SpeakingCell.copy(_:)))
     }
     
-    override func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         // empty function - doesn't need to do anything, just needs to be defined
     }
     
-    func getVerbAtIndexPath(indexPath: NSIndexPath) -> Verb {
-        return sections[indexPath.section].verbs[indexPath.row]
+    func getVerbAtIndexPath(_ indexPath: IndexPath) -> Verb {
+        return sections[(indexPath as NSIndexPath).section].verbs[(indexPath as NSIndexPath).row]
     }
     
     // MARK: Searching
     
-    func filterVerbsForSearchText(searchText: String) {
+    func filterVerbsForSearchText(_ searchText: String) {
         if (language != nil) {
-            filteredVerbs = language!.searchVerbs(searchText)
+            let noAccents = searchText.folding(options: .diacriticInsensitive, locale: Locale.current)
+            filteredVerbs = language!.searchVerbs(noAccents)
         }
         
         tableView.reloadData()
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         filterVerbsForSearchText(searchController.searchBar.text!)
     }
     

@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
+
+typealias JSONDict = [String: AnyObject]
+
+protocol Model {
+    
+    init(dict: JSONDict)
+    
+}

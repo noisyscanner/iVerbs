@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+enum IVError: Error {
+    case invalidToken
+    case noData
+}

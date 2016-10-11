@@ -7,55 +7,80 @@
 //
 
 import UIKit
+import LGSideMenuController
+import NightNight
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    var splitViewController: UISplitViewController?
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        splitViewController = self.window!.rootViewController as? UISplitViewController
+        splitViewController?.delegate = self
+        splitViewController?.preferredDisplayMode = .allVisible
 
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
+        UINavigationBar.appearance().mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkNav)
+//        UINavigationBar.appearance().mixedTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkNav)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.white
+        ]
+        
+        // Add 'Speak' menu item
+        let menu = UIMenuController.shared
+        let speakaction = UIMenuItem(title: "Speak", action: #selector(SpeakingCell.speak(_:)))
+        
+        var newItems = menu.menuItems ?? [UIMenuItem]()
+        newItems.append(speakaction)
+        menu.menuItems = newItems
+        
+        if Language.noneInstalled { // No languages are installed
+            
+            // Show the setup storyboard
+            let storyboard = UIStoryboard(name: "FirstLaunch", bundle: nil)
+            let firstvc = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController")
+            
+            self.window!.makeKeyAndVisible()
+            self.window!.rootViewController?.present(firstvc, animated: true, completion: nil)
+            
+        } else {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let langnc = storyboard.instantiateViewController(withIdentifier: "LanguageSelectionNC") as! UINavigationController
+//            let langview = langnc.viewControllers.first! as! LanguageSelectionVC
+            
+            let mainVC = MainVC(menuView: langnc, splitViewController: self.splitViewController!)
+//            mainVC.view.frame = CGRect(x: mainVC.view.frame.origin.x, y: mainVC.view.frame.origin.y, width: mainVC.view.frame.width, height: 500)
+            
+            self.window!.makeKeyAndVisible()
+            self.window!.rootViewController = mainVC
+            
+        }
+        
+        if let nightMode = SettingManager.sharedInstance.get("night") {
+            // Night mode setting exists
+            NightNight.theme = nightMode.on ? .night : .normal
+        } else {
+            // Doesn't exist, default is normal theme
+            NightNight.theme = .normal
+        }
+        
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-    // MARK: - Split view
-
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+    
+    // MARK: Split View Controller
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.detailItem == nil {
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? VerbDetailController else { return false }
+        if topAsDetailController.verb == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }
         return false
     }
-
+    
 }
-

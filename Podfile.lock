@@ -1,0 +1,82 @@
+PODS:
+  - Alamofire (4.0.1)
+  - Firebase/AdMob (3.6.0):
+    - Firebase/Analytics
+    - Google-Mobile-Ads-SDK (= 7.11.0)
+  - Firebase/Analytics (3.6.0):
+    - FirebaseAnalytics (= 3.4.2)
+  - Firebase/Core (3.6.0):
+    - Firebase/Analytics
+  - FirebaseAnalytics (3.4.2):
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.2)
+  - FirebaseInstanceID (1.0.8)
+  - Google-Mobile-Ads-SDK (7.11.0)
+  - GoogleInterchangeUtilities (1.2.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.1.1)
+  - GoogleUtilities (1.3.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - LGSideMenuController (1.0.10)
+  - NightNight (0.3.1)
+  - Realm (2.0.0):
+    - Realm/Headers (= 2.0.0)
+  - Realm/Headers (2.0.0)
+  - RealmSwift (2.0.0):
+    - Realm (= 2.0.0)
+  - SCLAlertView (0.6.0)
+  - SwiftSpinner (1.0.2)
+  - TKSubmitTransition (0.2)
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `master`)
+  - Firebase/AdMob
+  - Firebase/Core
+  - LGSideMenuController (~> 1.0.0)
+  - NightNight (from `~/Desktop/Dev/apps/podforks/NightNight`)
+  - RealmSwift
+  - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift`)
+  - SwiftSpinner
+  - TKSubmitTransition (from `~/Desktop/Dev/apps/podforks/TKSubmitTransition`)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: master
+    :git: https://github.com/Alamofire/Alamofire.git
+  NightNight:
+    :path: "~/Desktop/Dev/apps/podforks/NightNight"
+  SCLAlertView:
+    :git: https://github.com/vikmeup/SCLAlertView-Swift
+  TKSubmitTransition:
+    :path: "~/Desktop/Dev/apps/podforks/TKSubmitTransition"
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 81913262043b41bbb446b889849acbc9dcb297b8
+    :git: https://github.com/Alamofire/Alamofire.git
+  SCLAlertView:
+    :commit: ac3d58970d785da0755049a28eca193893c142d0
+    :git: https://github.com/vikmeup/SCLAlertView-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
+  FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  Google-Mobile-Ads-SDK: 0e864ab93ba1ff8afe92e16de0e4e883f581ed33
+  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
+  GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
+  LGSideMenuController: 8682bdbd0008c1acfbce95eaf96cc3657bca5f95
+  NightNight: c3ff139aace06406787b7c6cc85e4d954f53e29a
+  Realm: 6dda421ae4b3e9a09742fc2cf4b876d459cbedcd
+  RealmSwift: 7d015f34a2781a50889be9b5a15c36c08597ea0e
+  SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
+  SwiftSpinner: 1c80ff6ea1c47e2faa1dfce0fcd5e6b39a47fd51
+  TKSubmitTransition: 70aba90834d8da5d5a4044cdcbbcc1fc43edca7b
+
+PODFILE CHECKSUM: 93d864f1e22777e0e20d939b3c0649f53d3e67f9
+
+COCOAPODS: 1.1.0.rc.2
