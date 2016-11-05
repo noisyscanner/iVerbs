@@ -93,6 +93,15 @@ struct ApiResponse {
             return false
         }
         
+        guard response.response != nil else { return false }
+        
+        // Check if status code was 401 or 403
+        guard ![401, 403].contains(response.response!.statusCode) else {
+            // Authentication error
+            _error = IVError.auth
+            return false
+        }
+        
         // Check that data was returned
         guard response.result.value != nil else {
             _error = IVError.noData

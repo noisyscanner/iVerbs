@@ -27,7 +27,7 @@ class LanguageSelectionVC: UIViewController, UITableViewDelegate, UITableViewDat
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(LanguageSelectionVC.handleRefresh(_:)), for: UIControlEvents.valueChanged)
-        refreshControl.tintColor = iVerbs.colour
+        refreshControl.tintColor = iVerbs.Colour.lightBlue
         
         return refreshControl
     }()
@@ -37,7 +37,7 @@ class LanguageSelectionVC: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         // Set up night mode colours
-        self.navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkNav)
+        self.navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkNav)
         langList.mixedBackgroundColor = MixedColor(normal: UIColor.white, night: iVerbs.Colour.dark)
         langList.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
         
@@ -237,7 +237,7 @@ class LanguageSelectionVC: UIViewController, UITableViewDelegate, UITableViewDat
                     } else {
                         let title = "Error updating language"
                         iVerbs.displayError(title, message: error!.localizedDescription)
-                        print(title, error)
+                        print(title, error!)
                     }
                     
                     cell.updateCell()
@@ -252,7 +252,7 @@ class LanguageSelectionVC: UIViewController, UITableViewDelegate, UITableViewDat
                     } else {
                         let title = "Error installing language"
                         iVerbs.displayError(title, message: error!.localizedDescription)
-                        print(title, error)
+                        print(title, error!)
                     }
                     
                     cell.updateCell()

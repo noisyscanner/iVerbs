@@ -10,9 +10,9 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "16306C09-91EA-418F-ADDA-60BDAE4F7A9D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "376E39A442AFC4EC56A66CF9A84AB3D937D8DACF" : "..\/..\/apps\/podforks\/TKSubmitTransition",
-    "EE4998A5FD50BD39E749D6BC5F10220AE2CAFD73" : "iVerbs%20French\/",
-    "036463D59F3F0090FC8AFEFABCA3DF1010686B8D" : "..\/..\/apps\/podforks\/NightNight"
+    "376E39A442AFC4EC56A66CF9A84AB3D937D8DACF" : "new\/TKSubmitTransition\/",
+    "EE4998A5FD50BD39E749D6BC5F10220AE2CAFD73" : "new\/",
+    "036463D59F3F0090FC8AFEFABCA3DF1010686B8D" : "new\/NightNight\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "iVerbs",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

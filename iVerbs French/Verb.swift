@@ -75,21 +75,33 @@ class Verb: Object {
     }
     
     
-    convenience init(dict: JSONDict) {
+    /// Create new verb with data from API,
+    /// returns nil if data was invalid
+    convenience init?(dict: JSONDict) {
         self.init()
         
-        self.id = dict["id"] as! Int
-        self.english = dict["e"] as! String
-        self.infinitive = dict["i"] as! String
-        self.normalisedInfinitive = dict["ni"] as! String
-        self.helper_id = dict["hid"] as! Int
-        self.isHelper = dict["ih"] as! Bool
+        // Validate given data
+        guard let id = dict["id"] as? Int else { return nil }
+        guard let english = dict["e"] as? String else { return nil }
+        guard let infinitive = dict["i"] as? String else { return nil }
+        guard let normalisedInfinitive = dict["ni"] as? String else { return nil }
+        guard let helper_id = dict["hid"] as? Int else { return nil }
+        guard let isHelper = dict["ih"] as? Bool else { return nil }
+        guard let conjugations = (dict["conjugations"] as? JSONDict)?["data"] as? [JSONDict] else { return nil }
+        
+        self.id = id
+        self.english = english
+        self.infinitive = infinitive
+        self.normalisedInfinitive = normalisedInfinitive
+        self.helper_id = helper_id
+        self.isHelper = isHelper
         
         // Sort out conjugations
-        let conjugations = (dict["conjugations"] as! JSONDict)["data"] as! [JSONDict]
         for object in conjugations {
-            let conjugation = Conjugation(dict: object)
-            self.conjugations.append(conjugation)
+            if let conjugation = Conjugation(dict: object) {
+                // If conjugation is nil, the data is invalid so don't create it
+                self.conjugations.append(conjugation)
+            }
         }
         
     }
@@ -113,8 +125,10 @@ class Verb: Object {
             }
             
             // Create verb object from dictionary and appent to array
-            let verb = Verb(dict: verbDict)
-            verbs.append(verb)
+            // If data is invalid, verb = nil so is not added
+            if let verb = Verb(dict: verbDict) {
+                verbs.append(verb)
+            }
             
         }
         

@@ -18,6 +18,8 @@ class ApiRequest {
     var path: String // The relative path to make the request to eg. '/languages'
     var method: HTTPMethod // The HTTP method used to make the request
     var callback: ApiCallback // A callback to be called when the request completes (see above typealias)
+    var parameters: Parameters? // POST vars
+    var encoding: ParameterEncoding = JSONEncoding.default
     
     var manager: SessionManager! // For API requests
     
@@ -40,32 +42,34 @@ class ApiRequest {
     }
     
     // Create a new API Request instance
-    // Currently not used, the below convenience initialiser delegates to this method
+    // The below convenience initialiser delegates to this method
     // In the future it may be required that we use POST or other HTTP methods
-    init(path: String, method: HTTPMethod, callback: @escaping ApiCallback) {
+    init(path: String, method: HTTPMethod, parameters: Parameters?, callback: @escaping ApiCallback) {
         self.path = path
         self.method = method
         self.callback = callback
+        self.parameters = parameters
         
         let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 5
+        configuration.timeoutIntervalForRequest = 10
+        configuration.timeoutIntervalForResource = 10
         manager = SessionManager(configuration: configuration)
+    }
+    
+    convenience init(path: String, method: HTTPMethod, callback: @escaping ApiCallback) {
+        self.init(path: path, method: method, parameters: nil, callback: callback)
     }
     
     // Convenience init for GET request
     convenience init(path: String, callback: @escaping ApiCallback) {
-        self.init(path: path, method: .get, callback: callback)
+        self.init(path: path, method: .get, parameters: nil, callback: callback)
     }
     
     // Make the request and call the callback function on completion
     func makeRequest() {
-        // Create request instance with 3rd party Alamofire networking library
+        // Create request instance with Alamofire networking library
 
-
-//        let request = manager!.request(method, url, encoding: .json, headers: nil)
-//        let request = manager!.request(url, method: HTTPMethod.get, parameters: nil, encoding: .json, headers: nil)
-        let request = manager.request(url, method: method, parameters: nil, encoding: JSONEncoding.default, headers: nil)
+        let request = manager.request(url, method: method, parameters: parameters, encoding: encoding, headers: ["Authorization": "Bearer " + iVerbs.Api.key])
         
         print("Making request to:", url) // Log to console
         

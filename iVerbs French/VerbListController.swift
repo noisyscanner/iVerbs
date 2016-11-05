@@ -11,8 +11,6 @@ import RealmSwift
 import LGSideMenuController
 import NightNight
 
-import GoogleMobileAds
-
 // To identify whether the verb list
 // is being sorted by Infinitive or English form
 enum VerbListOrder {
@@ -20,11 +18,7 @@ enum VerbListOrder {
     case english
 }
 
-class VerbListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating, GADBannerViewDelegate {
-    
-    @IBOutlet weak var bannerViewContainer: UIView!
-    
-    let bannerManager = BannerManager.shared
+class VerbListController: UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating {
     
     // Language should always be set before the view appears on screen
     var language: Language? {
@@ -39,9 +33,6 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     // Reference to the parent MainVC controller, 
     // so we can show and hide the Language List View from this controller
     var delegate: MainVC!
-    
-    // Table view
-    @IBOutlet weak var tableView: UITableView!
     
     // Search controller
     let searchController = UISearchController(searchResultsController: nil)
@@ -70,7 +61,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         // Get the sort order
-        let sortSelector = Selector((order == .infinitive) ? "sortNormalisedInfinitive" : "sortEnglish")
+        let sortSelector = Selector(order == .infinitive ? "sortNormalisedInfinitive" : "sortEnglish")
         
         // Find each verb's section
         let sortedVerbs: [Verb] = language!.verbs.map { verb in
@@ -119,12 +110,6 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
             _sections!.insert(favouriteSection, at: 0)
         }
     }
-    
-    // Initialise with Language
-    init(language: Language?) {
-        self.language = language
-        super.init(nibName: "SearchController", bundle: Bundle.main)
-    }
 
     // Required to implement this
     // No need to override default behaviour so call super
@@ -136,19 +121,20 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         // Night mode colours
         let mixedbg = MixedColor(normal: UIColor.groupTableViewBackground, night: iVerbs.Colour.dark)
         view.mixedBackgroundColor = mixedbg
         tableView.mixedBackgroundColor = mixedbg
         tableView.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
-        navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
-        searchController.searchBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
+        searchController.searchBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
         
         searchController.searchBar.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
         
         
-        tableView.tintColor = iVerbs.colour
+        tableView.tintColor = iVerbs.Colour.lightBlue
         tableView.sectionIndexBackgroundColor = UIColor.black
         
         // Set up search controller
@@ -157,7 +143,6 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        let _ = bannerManager.setupBannerAds(viewController: self, container: bannerViewContainer)
         
         
 //        reloadLanguage()
@@ -218,11 +203,10 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showVerb" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                
+            if let indexPath = tableView.indexPathForSelectedRow {
                 let verb: Verb
                 if userIsSearching {
-                    verb = filteredVerbs![(indexPath as NSIndexPath).row]
+                    verb = filteredVerbs![indexPath.row]
                 } else {
                     verb = getVerbAtIndexPath(indexPath)
                 }
@@ -232,13 +216,15 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
+
+                
             }
         }
     }
 
     // MARK: - Table View
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if userIsSearching {
             return 1
         }
@@ -246,7 +232,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
         return self.sections.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if userIsSearching {
             return filteredVerbs!.count
         }
@@ -255,7 +241,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // section headers: appear above each `UITableView` section
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // do not display empty sections
         if !userIsSearching {
             let section = self.sections[section]
@@ -267,7 +253,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
         return nil
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let v = view as! UITableViewHeaderFooterView
         v.backgroundView?.mixedBackgroundColor = MixedColor(normal: UIColor.groupTableViewBackground, night: iVerbs.Colour.darkTable)
         v.textLabel?.mixedTextColor = MixedColor(normal: UIColor.darkText, night: UIColor.lightText)
@@ -278,7 +264,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     }*/
     
     
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if userIsSearching {
             return 0
         }
@@ -287,7 +273,7 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if userIsSearching {
             return nil
         }
@@ -296,13 +282,13 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // Get the cell instance
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VerbCell", for: indexPath) as! VerbListCell
         cell.language = language
 
         let verb: Verb
         if userIsSearching {
-            verb = filteredVerbs![(indexPath as NSIndexPath).row]
+            verb = filteredVerbs![indexPath.row]
         } else {
             verb = getVerbAtIndexPath(indexPath)
         }
@@ -319,37 +305,38 @@ class VerbListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // Called when the user taps a verb in the list
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        self.performSegueWithIdentifier("showVerb", sender: self)
-//    }
+    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "showVerb", sender: tableView.cellForRow(at: indexPath))
+    }*/
 
     // Verbs may not be deleted from the list
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
     // Should show menu for 'Speak' and 'Copy' actions
-    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return (action == #selector(SpeakingCell.copy(_:)) || action == #selector(SpeakingCell.copy(_:)))
     }
     
-    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         // empty function - doesn't need to do anything, just needs to be defined
     }
     
     func getVerbAtIndexPath(_ indexPath: IndexPath) -> Verb {
-        return sections[(indexPath as NSIndexPath).section].verbs[(indexPath as NSIndexPath).row]
+        return sections[indexPath.section].verbs[indexPath.row]
     }
     
     // MARK: Searching
     
     func filterVerbsForSearchText(_ searchText: String) {
         if (language != nil) {
-            let noAccents = searchText.folding(options: .diacriticInsensitive, locale: Locale.current)
+            let noAccents = searchText.folding(options: .diacriticInsensitive, locale: language!.nsLocale)
             filteredVerbs = language!.searchVerbs(noAccents)
         }
         

@@ -35,22 +35,22 @@ DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
   - LGSideMenuController (~> 1.0.0)
-  - NightNight (from `~/Desktop/Dev/apps/podforks/NightNight`)
+  - NightNight (from `./NightNight`)
   - RealmSwift
   - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift`)
   - SwiftSpinner
-  - TKSubmitTransition (from `~/Desktop/Dev/apps/podforks/TKSubmitTransition`)
+  - TKSubmitTransition (from `./TKSubmitTransition`)
 
 EXTERNAL SOURCES:
   Alamofire:
     :branch: master
     :git: https://github.com/Alamofire/Alamofire.git
   NightNight:
-    :path: "~/Desktop/Dev/apps/podforks/NightNight"
+    :path: "./NightNight"
   SCLAlertView:
     :git: https://github.com/vikmeup/SCLAlertView-Swift
   TKSubmitTransition:
-    :path: "~/Desktop/Dev/apps/podforks/TKSubmitTransition"
+    :path: "./TKSubmitTransition"
 
 CHECKOUT OPTIONS:
   Alamofire:
@@ -77,6 +77,6 @@ SPEC CHECKSUMS:
   SwiftSpinner: 1c80ff6ea1c47e2faa1dfce0fcd5e6b39a47fd51
   TKSubmitTransition: 70aba90834d8da5d5a4044cdcbbcc1fc43edca7b
 
-PODFILE CHECKSUM: 93d864f1e22777e0e20d939b3c0649f53d3e67f9
+PODFILE CHECKSUM: 803a67720ecccb5f81838fa2e4143c0114675cd7
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.0.1

@@ -21,7 +21,7 @@ class iVerbsTintedCell: UITableViewCell {
         
         // Set custom background view on tap, with iVerbs colour
         let sbv = UIView()
-        sbv.mixedBackgroundColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        sbv.mixedBackgroundColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
         self.selectedBackgroundView = sbv
         
         // Set colour of text labels when the cell is tapped to white

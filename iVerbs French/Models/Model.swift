@@ -13,6 +13,6 @@ typealias JSONDict = [String: AnyObject]
 
 protocol Model {
     
-    init(dict: JSONDict)
+    init?(dict: JSONDict)
     
 }

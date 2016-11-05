@@ -23,7 +23,7 @@ class VerbDetailController: UITableViewController {
     override func viewDidLoad() {
         tableView.mixedBackgroundColor = MixedColor(normal: UIColor.groupTableViewBackground, night: iVerbs.Colour.dark)
         tableView.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
-        navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
         if let lblEnglish = self.tableView.tableHeaderView as? UILabel {
             lblEnglish.mixedTextColor = MixedColor(normal: UIColor.darkText, night: UIColor.lightText)
         }

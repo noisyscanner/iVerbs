@@ -17,7 +17,6 @@ class Product: Object {
     dynamic var localizedDescription: String = ""
     dynamic var price: Float = 0.0
     dynamic var priceLocaleIdentifier: String = ""
-//    dynamic var purchased: Bool = false
     
     var purchased: Bool {
         return ProductRepo.store.isProductPurchased(productIdentifier)
@@ -32,8 +31,14 @@ class Product: Object {
         self.priceLocaleIdentifier = skProduct.priceLocale.identifier
     }
     
+    // Return all projects
     class func all() -> Results<Product> {
         return RealmManager.realm.objects(Product.self)
+    }
+    
+    // Find Product by its identifier
+    class func findBy(identifier: String) -> Product? {
+        return all().filter("productIdentifier = '\(identifier)'").first
     }
     
 }

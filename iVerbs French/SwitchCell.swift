@@ -9,6 +9,8 @@
 import UIKit
 import NightNight
 
+// Sell in the settings controller view that has a switch in it
+// to control a boolean setting
 class SwitchCell: iVerbsTintedCell, SettingCell {
     
     @IBOutlet weak var label: UILabel!
@@ -18,7 +20,6 @@ class SwitchCell: iVerbsTintedCell, SettingCell {
         didSet {
             self.label.text = setting?.label
             self.onoff.isOn = setting?.on ?? false
-            print("Initial switch: ", setting?.on)
         }
     }
     

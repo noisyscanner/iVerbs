@@ -46,14 +46,21 @@ class Conjugation: Object, Model, Speaks {
     
     
     // Create Conjugation instance with Dictionary from API
-    required convenience init(dict: JSONDict) {
+    // Return nil if the data is invalid
+    required convenience init?(dict: JSONDict) {
         self.init()
         
+        // Validate data
+        guard let conjugation = dict["c"] as? String else { return nil }
+        guard let normalisedConjugation = dict["nc"] as? String else { return nil }
+        guard let pid = dict["pid"] as? Int else { return nil }
+        guard let tid = dict["tid"] as? Int else { return nil }
+        
         // Short keys
-        self.conjugation = dict["c"] as! String
-        self.normalisedConjugation = dict["nc"] as! String
-        self.pronoun_id = dict["pid"] as! Int
-        self.tense_id = dict["tid"] as! Int
+        self.conjugation = conjugation
+        self.normalisedConjugation = normalisedConjugation
+        self.pronoun_id = pid
+        self.tense_id = tid
         
     }
     

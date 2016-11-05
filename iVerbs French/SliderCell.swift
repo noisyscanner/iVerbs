@@ -23,7 +23,7 @@ class SliderCell: iVerbsTintedCell, SettingCell {
     
     override func awakeFromNib() {
         label.mixedTextColor = MixedColor(normal: UIColor.darkText, night: UIColor.white)
-        slider.mixedMinimumTrackTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkBlue)
+        slider.mixedMinimumTrackTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
     }
     
 }

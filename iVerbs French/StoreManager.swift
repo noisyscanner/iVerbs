@@ -7,11 +7,12 @@
 //
 
 import StoreKit
+import Alamofire
 
 public typealias ProductIdentifier = String
 public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> ()
 
-open class StoreManager : NSObject  {
+open class StoreManager : NSObject {
     
     
     fileprivate let productIdentifiers: Set<ProductIdentifier>
@@ -39,6 +40,39 @@ open class StoreManager : NSObject  {
         super.init()
         SKPaymentQueue.default().add(self)
     }
+    
+    /// Validate IAP receipt from Apple
+    func validateReceipt(callback: @escaping (_ success: Bool) -> Void) {
+        
+        if let receipt =  Bundle.main.appStoreReceiptURL {
+            do {
+                let data = try Data(contentsOf: receipt)
+                let requestContents:[String:String] =
+                    ["receipt": data.base64EncodedString(options: [])]
+                let requestData = try! JSONSerialization.data(withJSONObject: requestContents,options: [])
+                var request = URLRequest(url: URL(string: "https://bradreed.co.uk/ivapi/v1/verify")!)
+                request.httpMethod = "POST"
+                request.httpBody = requestData
+                
+                let param = try URLEncoding.httpBody.encode(request, with: nil)
+                
+                Alamofire.request(param)
+                    .responseJSON { response in
+                        let apiresponse = ApiResponse(response: response)
+                        if let valid = apiresponse.data?["valid"] as? Bool {
+                            callback(valid)
+                        } else {
+                            // Data not received, assume failure
+                            callback(false)
+                        }
+                    }
+            } catch let error {
+                print("Error validating receipt", error)
+                callback(false)
+            }
+        } else { callback(false) }
+    
+    }
 }
 
 // MARK: - StoreKit API
@@ -51,6 +85,7 @@ extension StoreManager {
         
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
         productsRequest!.delegate = self
+        
         productsRequest!.start()
     }
     
@@ -68,9 +103,13 @@ extension StoreManager {
             }
         } else {
             let identifier = productModel.productIdentifier
-            let skProduct = self.skProducts!.filter { skProduct in
+            guard let skProduct = self.skProducts!.filter({ skProduct in
                 return identifier == skProduct.productIdentifier
-            }.first!
+            }).first else {
+                // Product doesn't actually exist, fail
+                NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: StoreManager.StoreManagerFailureNotification)))
+                return
+            }
             self.buyProduct(skProduct)
         }
     }
@@ -126,13 +165,25 @@ extension StoreManager: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch (transaction.transactionState) {
             case .purchased:
-                complete(transaction: transaction)
+                validateReceipt() { success in
+                    if success {
+                        self.complete(transaction: transaction)
+                    } else {
+                        self.fail(transaction: transaction)
+                    }
+                }
                 break
             case .failed:
                 fail(transaction: transaction)
                 break
             case .restored:
-                restore(transaction: transaction)
+                validateReceipt() { success in
+                    if success {
+                        self.restore(transaction: transaction)
+                    } else {
+                        self.fail(transaction: transaction)
+                    }
+                }
                 break
             case .deferred:
                 break
@@ -152,7 +203,6 @@ extension StoreManager: SKPaymentTransactionObserver {
         print("complete...")
         
         // TODO: Validate receipt
-        
         
         deliverPurchaseNotification(for: transaction.payment.productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)

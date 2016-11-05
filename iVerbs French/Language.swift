@@ -27,6 +27,11 @@ class Language: Object, Model {
         return language + " " + emojiFlag()
     }
     
+    // Return Locale object
+    var nsLocale: Locale {
+        return Locale(identifier: locale)
+    }
+    
     // Many-to-one relationships
     var tenses = List<Tense>()
     var pronouns = List<Pronoun>()
@@ -56,37 +61,26 @@ class Language: Object, Model {
     
     // MARK: Initialisation
     
-    required convenience init(dict: JSONDict) {
-        self.init()
-        
+    /// Init language with data from API, return nil on invalid data
+    required convenience init?(dict: JSONDict) {
         var data = dict
         if let dataDict = dict["data"] as? JSONDict {
             data = dataDict
         }
+        self.init()
         
-        self.id = data["id"] as! Int
-        self.code = data["code"] as! String
-        self.language = data["lang"] as! String
-        self.locale = data["locale"] as! String
-        self.latestVersion = data["version"] as! Int
+        guard let id = data["id"] as? Int else { return nil }
+        guard let code = data["code"] as? String else { return nil }
+        guard let language = data["lang"] as? String else { return nil }
+        guard let locale = data["locale"] as? String else { return nil }
+        guard let latestVersion = data["version"] as? Int else { return nil }
+        
+        self.id = id
+        self.code = code
+        self.language = language
+        self.locale = locale
+        self.latestVersion = latestVersion
     }
-    
-    /*class func initWithDataFromAPI(_ input: JSONDict) -> Language {
-        let language = self.init()
-        var data = input
-        
-        if let dataDict = input["data"] as? JSONDict {
-            data = dataDict
-        }
-        
-        language.id = data["id"] as! Int
-        language.code = data["code"] as! String
-        language.language = data["lang"] as! String
-        language.locale = data["locale"] as! String
-        language.latestVersion = data["version"] as! Int
-        
-        return language
-    }*/
     
     func installSchema(_ dict: JSONDict) {
         let data = dict["data"] as! JSONDict
@@ -121,7 +115,7 @@ class Language: Object, Model {
         // Get the language schema from the API
         let request = ApiRequest(path: "/languages/" + code + "/schema") { response in
             if response.failed {
-                print("Error fetching language schema: ", response.error)
+                print("Error fetching language schema: ", response.error!)
                 onCompletion(response.error)
                 
             } else {
@@ -134,7 +128,7 @@ class Language: Object, Model {
                 // Install verbs
                 self.downloadVerbs { error in
                     if error != nil {
-                        print("Error fetching verbs for Language '\(self.code)' - ", error)
+                        print("Error fetching verbs for Language '\(self.code)' - ", error!)
                     } else {
                         print("Downloaded verbs: ", self.language)
                     }
@@ -161,7 +155,7 @@ class Language: Object, Model {
         RealmManager.realmWrite { realm in
             self.version = 0
             
-            realm.delete(self.verbs)
+            realm.delete(self.verbs) // removes all conjugations too
             realm.delete(self.pronouns)
             realm.delete(self.tenses)
             
@@ -229,8 +223,10 @@ class Language: Object, Model {
                     
                     // Loop verbs array, create an array of Verb objects
                     for verbDict in verbArray! {
-                        let verb = Verb(dict: verbDict)
-                        verbs.append(verb)
+                        // If verbDict is invalid, verb = nil so not added
+                        if let verb = Verb(dict: verbDict) {
+                            verbs.append(verb)
+                        }
                     }
                     
                     // Write verbs and conjugations to Realm
@@ -274,7 +270,7 @@ class Language: Object, Model {
                         onCompletion(response.error)
                     }
                 } else {
-                    print("Request failed for new verbs for ", self.code, "Error: ", response.error)
+                    print("Request failed for new verbs for ", self.code, "Error: ", response.error!)
                     onCompletion(response.error)
                 }
             }.makeRequest()
@@ -291,8 +287,8 @@ class Language: Object, Model {
     
     func searchVerbs(_ query: String) -> Results<Verb> {
         // [c] means case insensitive
-        let predicate = NSPredicate(format: "normalisedInfinitive CONTAINS[c] %@ OR english CONTAINS[c] %@ OR ANY conjugations.normalisedConjugation CONTAINS[c] %@",
-            query, query, query)
+        let predicate = NSPredicate(format: "normalisedInfinitive CONTAINS[c] %@ OR english CONTAINS[c] %@ OR ANY conjugations.normalisedConjugation CONTAINS[c] %@", argumentArray:
+            [query, query, query])
         return self.verbs.filter(predicate)
     }
     

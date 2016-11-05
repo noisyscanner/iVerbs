@@ -11,8 +11,6 @@ import RealmSwift
 import SCLAlertView
 
 struct iVerbs {
-    
-    static var colour = UIColor(red: 0.165, green: 0.427, blue: 0.62, alpha: 1) // #2a6d9e
 
     struct Colour {
         static let dark = UIColor(red: 23/255, green: 23/255, blue: 23/255, alpha: 1) // #171717
@@ -22,19 +20,26 @@ struct iVerbs {
         
         static let lightSep = UIColor(red: 0.784, green: 0.781, blue: 0.8, alpha: 1) // #C8C7CC
         static let darkBlue = UIColor(red: 15/255, green: 40/255, blue: 59/255, alpha: 1) // #0F283B
+        static let lightBlue = UIColor(red: 0.165, green: 0.427, blue: 0.62, alpha: 1) // #2a6d9e
         
         
     }
-    /*static var colour: UIColor {
-        return Setting.by(identifier: "night")?.on ?
-        static var colour = UIColor(red: 0.165, green: 0.427, blue: 0.62, alpha: 1) : // #2a6d9e
-    }*/
     
     struct Api {
-        static var baseURL = "http://ivapi.bradreed.co.uk"
-//        static var baseURL = "http://brads-macbook-air.local"
-        static let salt = "mSRy4DOUWH TmJ1o-bLlnl~pfDkKrWmtktl~OMHZQbQ1ufcf o%aQl1q8iiQ"
+        static var baseURL = iVerbs.config(named: "Api.BaseUrl") as! String
+        static var key = iVerbs.config(named: "Api.Key") as! String
+        static let salt = iVerbs.config(named: "Api.Salt") as! String
         
+    }
+    
+    // Get config item from Settings.plist
+    static func config(named keyname:String) -> Any? {
+        if let path = Bundle.main.path(forResource: "Settings", ofType: "plist") {
+            if let dic = NSDictionary(contentsOfFile: path) {
+                return dic.value(forKeyPath: keyname)
+            }
+        }
+        return nil
     }
     
     // Display an error alert to the user TODO optional retry closure parameter
@@ -42,7 +47,6 @@ struct iVerbs {
         // Alerts must be displayed on the main thread
         DispatchQueue.main.async {
             let alert = SCLAlertView()
-//            alert.showCloseButton = true
             
             let _ = alert.showError(title, subTitle: message, closeButtonTitle: cancelButtonTitle)
             

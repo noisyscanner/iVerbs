@@ -28,7 +28,7 @@
 		A282034C1BC5E3480012A322 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282034B1BC5E3480012A322 /* Section.swift */; };
 		A29ABEBE1D91E25A001FDB95 /* IVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ABEBD1D91E25A001FDB95 /* IVError.swift */; };
 		A29ABEC01D91FD63001FDB95 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ABEBF1D91FD63001FDB95 /* Model.swift */; };
-		A29D1D7C1C3984AD00021900 /* LanguageDownloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D1D7B1C3984AD00021900 /* LanguageDownloadTests.swift */; };
+		A29D1D7C1C3984AD00021900 /* LanguageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29D1D7B1C3984AD00021900 /* LanguageTests.swift */; };
 		A2A1A2AD1B2B01AA006E26C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */; };
 		A2A1A2AF1B2B01AA006E26C6 /* VerbListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2AE1B2B01AA006E26C6 /* VerbListController.swift */; };
 		A2A1A2B11B2B01AA006E26C6 /* VerbDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A1A2B01B2B01AA006E26C6 /* VerbDetailController.swift */; };
@@ -57,11 +57,15 @@
 		A2D7B1DD1C29CF4800CC1703 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7B1DC1C29CF4800CC1703 /* ApiResponse.swift */; };
 		A2E2A9B21DA5AA0F007047FD /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2A9B11DA5AA0F007047FD /* SettingsDelegate.swift */; };
 		A2E2A9B41DA84E99007047FD /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2A9B31DA84E99007047FD /* Product.swift */; };
-		A2E2A9B91DA91DA4007047FD /* BannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2A9B81DA91DA4007047FD /* BannerManager.swift */; };
 		A2E2A9BB1DA98470007047FD /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2A9BA1DA98470007047FD /* SliderCell.swift */; };
 		A2E2A9BD1DA98579007047FD /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2A9BC1DA98579007047FD /* SettingCell.swift */; };
 		A2F66A201D4973FE007D6DA5 /* Speaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F66A1F1D4973FE007D6DA5 /* Speaks.swift */; };
 		A2FCE6311C5A59D000808388 /* LanguageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCE6301C5A59D000808388 /* LanguageListCell.swift */; };
+		C0E87151EA84EE0A989FBA02 /* Pods_iVerbs_FrenchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD916E17DCF84013F496910E /* Pods_iVerbs_FrenchTests.framework */; };
+		E4C95B631DC9F02700C34B22 /* VerbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C95B621DC9F02700C34B22 /* VerbTests.swift */; };
+		E4C95B671DCB577D00C34B22 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4C95B651DCB529B00C34B22 /* Settings.plist */; };
+		E4C95B681DCB577F00C34B22 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4C95B651DCB529B00C34B22 /* Settings.plist */; };
+		E4C95B691DCB578000C34B22 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4C95B651DCB529B00C34B22 /* Settings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +98,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		54445A78B37269044A66C9D0 /* Pods-iVerbs FrenchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iVerbs FrenchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iVerbs FrenchTests/Pods-iVerbs FrenchTests.release.xcconfig"; sourceTree = "<group>"; };
 		6AED9577AF3A1759A934A82E /* Pods_iVerbs_French.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iVerbs_French.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2034E181DA173CD00115D66 /* ProductRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductRepo.swift; path = Store/ProductRepo.swift; sourceTree = "<group>"; };
 		A20F19FA1D4FD48C0043668D /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -114,7 +119,7 @@
 		A282034B1BC5E3480012A322 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Section.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A29ABEBD1D91E25A001FDB95 /* IVError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IVError.swift; sourceTree = "<group>"; };
 		A29ABEBF1D91FD63001FDB95 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Models/Model.swift; sourceTree = "<group>"; };
-		A29D1D7B1C3984AD00021900 /* LanguageDownloadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageDownloadTests.swift; sourceTree = "<group>"; };
+		A29D1D7B1C3984AD00021900 /* LanguageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTests.swift; sourceTree = "<group>"; };
 		A2A1A2A91B2B01AA006E26C6 /* iVerbs French.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iVerbs French.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A1A2AE1B2B01AA006E26C6 /* VerbListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VerbListController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -150,13 +155,17 @@
 		A2D7B1DC1C29CF4800CC1703 /* ApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		A2E2A9B11DA5AA0F007047FD /* SettingsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsDelegate.swift; path = Settings/SettingsDelegate.swift; sourceTree = "<group>"; };
 		A2E2A9B31DA84E99007047FD /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = Models/Product.swift; sourceTree = "<group>"; };
-		A2E2A9B81DA91DA4007047FD /* BannerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BannerManager.swift; path = Adverts/BannerManager.swift; sourceTree = "<group>"; };
 		A2E2A9BA1DA98470007047FD /* SliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
 		A2E2A9BC1DA98579007047FD /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		A2F66A1F1D4973FE007D6DA5 /* Speaks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaks.swift; sourceTree = "<group>"; };
 		A2FCE6301C5A59D000808388 /* LanguageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageListCell.swift; sourceTree = "<group>"; };
 		C5E8C2FE6483FB9B8AE8E899 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD916E17DCF84013F496910E /* Pods_iVerbs_FrenchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iVerbs_FrenchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C95B601DC9243C00C34B22 /* Pods_iVerbs_French.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_iVerbs_French.framework; path = "../../Library/Developer/Xcode/DerivedData/iVerbs-bbsxtiyeetapeieniatusqmptahj/Build/Products/Debug-iphonesimulator/Pods_iVerbs_French.framework"; sourceTree = "<group>"; };
+		E4C95B621DC9F02700C34B22 /* VerbTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerbTests.swift; path = ModelTests/VerbTests.swift; sourceTree = "<group>"; };
+		E4C95B651DCB529B00C34B22 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Settings.plist; path = "iVerbs French/Plist/Settings.plist"; sourceTree = "<group>"; };
 		EA0A3D605BECEA4E1E22415C /* Pods-iVerbs French.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iVerbs French.release.xcconfig"; path = "Pods/Target Support Files/Pods-iVerbs French/Pods-iVerbs French.release.xcconfig"; sourceTree = "<group>"; };
+		EC615EEAA7D0125C4BD5DECA /* Pods-iVerbs FrenchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iVerbs FrenchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iVerbs FrenchTests/Pods-iVerbs FrenchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FB45D34662F06F4194E169D0 /* Pods-iVerbs French.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iVerbs French.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iVerbs French/Pods-iVerbs French.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0E87151EA84EE0A989FBA02 /* Pods_iVerbs_FrenchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +202,8 @@
 			children = (
 				FB45D34662F06F4194E169D0 /* Pods-iVerbs French.debug.xcconfig */,
 				EA0A3D605BECEA4E1E22415C /* Pods-iVerbs French.release.xcconfig */,
+				EC615EEAA7D0125C4BD5DECA /* Pods-iVerbs FrenchTests.debug.xcconfig */,
+				54445A78B37269044A66C9D0 /* Pods-iVerbs FrenchTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -231,6 +243,7 @@
 		A2A1A2A01B2B01AA006E26C6 = {
 			isa = PBXGroup;
 			children = (
+				E4C95B651DCB529B00C34B22 /* Settings.plist */,
 				A2A1A2AB1B2B01AA006E26C6 /* iVerbs */,
 				A2A1A2C21B2B01AA006E26C6 /* iVerbs FrenchTests */,
 				A2A1A2CD1B2B01AA006E26C6 /* iVerbs FrenchUITests */,
@@ -253,12 +266,11 @@
 		A2A1A2AB1B2B01AA006E26C6 /* iVerbs */ = {
 			isa = PBXGroup;
 			children = (
-				A2E2A9B71DA91D88007047FD /* Adverts */,
+				A2034E171DA173A900115D66 /* Store */,
 				A2A1A2AC1B2B01AA006E26C6 /* AppDelegate.swift */,
 				A2E2A9B61DA900E3007047FD /* Database */,
 				A2CD7AD21BBD3CCA0085523B /* Support */,
 				A2CEC32D1BBD3C5D00BABCBF /* ViewControllers */,
-				A2034E171DA173A900115D66 /* Store */,
 				A23D1EEA1D50CFA70075A9E9 /* Settings */,
 				A2A1A2B71B2B01AA006E26C6 /* LaunchScreen.storyboard */,
 				A2C2DBE21BD507E50057E87E /* FirstLaunch.storyboard */,
@@ -276,7 +288,7 @@
 			children = (
 				A2A1A2C31B2B01AA006E26C6 /* iVerbs_FrenchTests.swift */,
 				A23B81DD1C24C79A00FCF7A9 /* APITests.swift */,
-				A29D1D7B1C3984AD00021900 /* LanguageDownloadTests.swift */,
+				E4C95B641DC9F02E00C34B22 /* ModelTests */,
 				A2A1A2C51B2B01AA006E26C6 /* Info.plist */,
 				A274F8F71C33618200C5BA46 /* ModelTests.swift */,
 			);
@@ -384,22 +396,25 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
-		A2E2A9B71DA91D88007047FD /* Adverts */ = {
-			isa = PBXGroup;
-			children = (
-				A2E2A9B81DA91DA4007047FD /* BannerManager.swift */,
-			);
-			name = Adverts;
-			sourceTree = "<group>";
-		};
 		CE43AB1D0CD2E125CB2790EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4C95B601DC9243C00C34B22 /* Pods_iVerbs_French.framework */,
 				A28203471BC322040012A322 /* AVFoundation.framework */,
 				C5E8C2FE6483FB9B8AE8E899 /* Pods.framework */,
 				6AED9577AF3A1759A934A82E /* Pods_iVerbs_French.framework */,
+				DD916E17DCF84013F496910E /* Pods_iVerbs_FrenchTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4C95B641DC9F02E00C34B22 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				A29D1D7B1C3984AD00021900 /* LanguageTests.swift */,
+				E4C95B621DC9F02700C34B22 /* VerbTests.swift */,
+			);
+			name = ModelTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,9 +445,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2A1A2D61B2B01AA006E26C6 /* Build configuration list for PBXNativeTarget "iVerbs FrenchTests" */;
 			buildPhases = (
+				ED59E5C0E6B822C6521C1B02 /* [CP] Check Pods Manifest.lock */,
 				A2A1A2BB1B2B01AA006E26C6 /* Sources */,
 				A2A1A2BC1B2B01AA006E26C6 /* Frameworks */,
 				A2A1A2BD1B2B01AA006E26C6 /* Resources */,
+				A94A6E1FA97818DA04DD6DBB /* [CP] Embed Pods Frameworks */,
+				EE63C7039FC82E2C8C250110 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -519,6 +537,7 @@
 				A2CB77CE1CF6176100C38C61 /* GoogleService-Info.plist in Resources */,
 				A2A1A2B61B2B01AA006E26C6 /* Assets.xcassets in Resources */,
 				A2A1A2B41B2B01AA006E26C6 /* Main.storyboard in Resources */,
+				E4C95B671DCB577D00C34B22 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +545,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C95B681DCB577F00C34B22 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +553,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C95B691DCB578000C34B22 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,6 +590,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iVerbs French/Pods-iVerbs French-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A94A6E1FA97818DA04DD6DBB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iVerbs FrenchTests/Pods-iVerbs FrenchTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E8A2088A25FD25F5EF10F3EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,7 +617,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ED59E5C0E6B822C6521C1B02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EE63C7039FC82E2C8C250110 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iVerbs FrenchTests/Pods-iVerbs FrenchTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -606,7 +672,6 @@
 				A2A1A2AF1B2B01AA006E26C6 /* VerbListController.swift in Sources */,
 				A282034A1BC3270C0012A322 /* SpeakingCell.swift in Sources */,
 				A2CCDB451C74C206001416A2 /* VerbListCell.swift in Sources */,
-				A2E2A9B91DA91DA4007047FD /* BannerManager.swift in Sources */,
 				A2608CC41D48C44D004737CB /* SettingsController.swift in Sources */,
 				A24FABDD1C4D3E8D00F1DFBC /* MainVC.swift in Sources */,
 				A2CD7AF41BBD3ECE0085523B /* TokenValidator.swift in Sources */,
@@ -644,7 +709,8 @@
 				A274F8F81C33618200C5BA46 /* ModelTests.swift in Sources */,
 				A23B81EE1C25CC6200FCF7A9 /* SHA1.swift in Sources */,
 				A2A1A2C41B2B01AA006E26C6 /* iVerbs_FrenchTests.swift in Sources */,
-				A29D1D7C1C3984AD00021900 /* LanguageDownloadTests.swift in Sources */,
+				E4C95B631DC9F02700C34B22 /* VerbTests.swift in Sources */,
+				A29D1D7C1C3984AD00021900 /* LanguageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,7 +863,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bradreed.iVerbs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brad/Desktop/Dev/iVerbs/New/iVerbs French/iVerbs French/iVerbs-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iVerbs French/iVerbs-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -818,20 +884,21 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.bradreed.iVerbs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brad/Desktop/Dev/iVerbs/New/iVerbs French/iVerbs French/iVerbs-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iVerbs French/iVerbs-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		A2A1A2D71B2B01AA006E26C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC615EEAA7D0125C4BD5DECA /* Pods-iVerbs FrenchTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brad/Desktop/Dev/iVerbs/New/iVerbs French/iVerbs French/iVerbs-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iVerbs French/iVerbs-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iVerbs French.app/iVerbs French";
 			};
@@ -839,13 +906,14 @@
 		};
 		A2A1A2D81B2B01AA006E26C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54445A78B37269044A66C9D0 /* Pods-iVerbs FrenchTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.iVerbs.iVerbs-FrenchTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brad/Desktop/Dev/iVerbs/New/iVerbs French/iVerbs French/iVerbs-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "iVerbs French/iVerbs-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iVerbs French.app/iVerbs French";
 			};

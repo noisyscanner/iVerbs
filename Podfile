@@ -1,14 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
+platform :ios, '9.0'
 
-target "iVerbs French" do
-
-    platform :ios, '9.0'
+def pods
 
     # Realm
     pod 'RealmSwift'
 
-    pod 'TKSubmitTransition', :path => '~/Desktop/Dev/apps/podforks/TKSubmitTransition'
-    pod 'NightNight', :path => '~/Desktop/Dev/apps/podforks/NightNight'
+    pod 'TKSubmitTransition', :path => './TKSubmitTransition'
+    pod 'NightNight', :path => './NightNight'
     pod 'SCLAlertView', :git => 'https://github.com/vikmeup/SCLAlertView-Swift'
     pod 'SwiftSpinner'
 
@@ -25,7 +25,6 @@ target "iVerbs French" do
     pod 'LGSideMenuController', '~> 1.0.0'
 
     # AdMob
-    source 'https://github.com/CocoaPods/Specs.git'
 
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
@@ -40,4 +39,13 @@ target "iVerbs French" do
             end
         end
     end
+end
+
+
+target "iVerbs French" do
+    pods
+end
+
+target "iVerbs FrenchTests" do
+    pods
 end

@@ -48,6 +48,7 @@ class LanguageListCell: iVerbsTintedCell {
             if !language!.installed {
                 self.selectedBackgroundView?.backgroundColor = UIColor.white
                 self.textLabel?.highlightedTextColor = UIColor.black
+                self.selectionStyle = .none
             }
             updateCell()
         }

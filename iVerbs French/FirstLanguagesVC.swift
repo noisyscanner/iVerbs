@@ -36,6 +36,8 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     var alertView: SCLAlertView?
     var alertResponder: SCLAlertViewResponder?
     
+    var retry = false // If no languages are loaded, this will be true to retry
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnInstall: UIButton!
     
@@ -43,9 +45,30 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
 //        self.tableView.allowsMultipleSelection = true
         
+        // If no languages were loaded properly, display a retry button
+        if Language.count == 0 {
+            retry = true
+            btnInstall.setTitle("RETRY", for: .normal)
+            btnInstall.isEnabled = true
+        }
+        
         // Give the 'Install' button a rounded corner style
         btnInstall.layer.cornerRadius = btnInstall.frame.size.height / 4
         btnInstall.clipsToBounds = true
+    }
+    
+    func retryFetchLanguages() {
+        LanguageManager.cacheAvailableLanguages { error in
+            if error == nil || Language.count == 0 {
+                iVerbs.displayError("Could not load", message: "Please try again")
+                self.updateInstallBtn()
+                self.btnInstall.setTitle("RETRY", for: .normal)
+            } else {
+                // Success
+                self.retry = false
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // MARK: Table View
@@ -78,6 +101,7 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !installedAll {
+            
             // Sort out the 'Install' button
             updateInstallBtn()
         }
@@ -102,7 +126,7 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // Update the state of the 'Install' button to disable or enable it
     func updateInstallBtn() {
-        if (tableView.indexPathsForSelectedRows?.count > 0) {
+        if (tableView.indexPathsForSelectedRows?.count > 0 || retry) {
             btnInstall.isEnabled = true
         } else {
             btnInstall.isEnabled = false
@@ -111,31 +135,36 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // User clicked 'Install'
     @IBAction func didClickInstall(_ sender: UIButton) {
-        if (!installedAll) {
-            btnInstall.isEnabled = false // Disable button
-            btnInstall.setTitle("One Moment...", for: UIControlState())
+        btnInstall.isEnabled = false // Disable button
+        btnInstall.setTitle("One Moment...", for: UIControlState())
+        if retry {
+            self.retryFetchLanguages()
+        } else if (!installedAll) {
+            
             self.installSelectedLanguages()
-        } else {
-            // 'Continue' button
-            
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let svc = appDelegate.splitViewController
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let langnc = storyboard.instantiateViewController(withIdentifier: "LanguageSelectionNC") as! UINavigationController
-//            let langview = langnc.viewControllers.first! as! LanguageSelectionVC
-            
-            let mainVC = MainVC(menuView: langnc, splitViewController: svc!)
-            
-            // Fade new view onto screen
-            UIView.transition(with: appDelegate.window!,
-                duration: 0.5,
-                options: UIViewAnimationOptions.transitionCrossDissolve,
-                animations: { _ in
-                    appDelegate.window?.rootViewController = mainVC
-                },
-                completion: nil)
-            
+        }
+    }
+    
+    // Go to the main app view
+    func continueToApp(sender: SCLAlertView) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let svc = appDelegate.splitViewController
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let langnc = storyboard.instantiateViewController(withIdentifier: "LanguageSelectionNC") as! UINavigationController
+        //            let langview = langnc.viewControllers.first! as! LanguageSelectionVC
+        
+        let mainVC = MainVC(menuView: langnc, splitViewController: svc!)
+        
+        // Fade new view onto screen
+        UIView.transition(with: appDelegate.window!,
+                          duration: 0.5,
+                          options: UIViewAnimationOptions.transitionCrossDissolve,
+                          animations: { _ in
+                            appDelegate.window?.rootViewController = mainVC
+            }
+                          ) { _ in
+                            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -193,8 +222,8 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         showSuccess()
         
         installedAll = true
-        btnInstall.setTitle("Continue", for: UIControlState())
-        btnInstall.isEnabled = true
+//        btnInstall.setTitle("Continue", for: UIControlState())
+//        btnInstall.isEnabled = true
         tableView.reloadData()
     }
     
@@ -209,8 +238,10 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if alertView != nil {
             dismissAlertView()
         }
-        alertView = SCLAlertView()
-//        alertView!.showCloseButton = false
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        alertView = SCLAlertView(appearance: appearance)
         
         alertResponder = alertView!.showTitle(
             "One Moment Please",
@@ -218,7 +249,7 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             duration: nil,
             completeText: nil,
             style: .wait,
-            colorStyle: iVerbs.colour.toUInt(),
+            colorStyle: iVerbs.Colour.lightBlue.toUInt(),
             colorTextButton: nil
         )
     }
@@ -227,7 +258,12 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if alertView != nil {
             dismissAlertView()
         }
-        alertView = SCLAlertView()
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        alertView = SCLAlertView(appearance: appearance)
+        
+        alertView?.addButton("Continue", target:self, selector: #selector(continueToApp(sender:)))
         alertResponder = alertView!.showSuccess("All Done",
             subTitle: "All selected languages have been downloaded and installed. Enjoy iVerbs!")
     }

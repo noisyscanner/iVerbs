@@ -25,21 +25,21 @@ class APITests: XCTestCase {
         // Use this because of the async stuff
         let expectation = self.expectation(description: "API Request Succeeds")
         
-        let request = ApiRequest(path: "/languages", callback: { response in
-            if let error = response.error {
-                print("API error: ", error.localizedFailureReason)
-            }
+        let request = ApiRequest(path: "/languages") { response in
+            /*if let error = response.error {
+                print("API error: ", error)
+            }*/
             XCTAssertTrue(response.succeeded) // Assert request succeeded
             XCTAssert(response.error == nil) // Assert there was no error
             
             expectation.fulfill() // Saying the async stuff is done
-        })
+        }
         
         request.makeRequest() // Make the request to the server
         
         // Wait for the expectation to be fulfilled before
         // ending the test
-        waitForExpectations(timeout: 5.0, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
     
     func testInvalidDataFromAPI() {
@@ -47,14 +47,11 @@ class APITests: XCTestCase {
         
         let expectation = self.expectation(description: "API Request Succeeds")
         
-        let request = ApiRequest(path: "/languages?invalidJSON=1", callback: { response in
-//            if response.failed {
-//                print("API error: ", response.error)
-//            }
+        let request = ApiRequest(path: "/languages?invalidJSON=1") { response in
             XCTAssertTrue(response.failed) // Assert there WAS an error
             
             expectation.fulfill() // Saying the async stuff is done
-        })
+        }
         
         request.makeRequest()
         
@@ -100,7 +97,7 @@ class APITests: XCTestCase {
         }
         request.makeRequest()
         
-        waitForExpectations(timeout: 10.0, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
     }
     
     func DISABLED_testPerformanceExample() {

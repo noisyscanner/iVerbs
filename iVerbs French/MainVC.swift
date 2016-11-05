@@ -8,6 +8,7 @@
 
 // Import package for the show/hide language list
 import LGSideMenuController
+import GoogleMobileAds
 
 /*
  * This class is the container view for the verb list (VerbListController)
@@ -17,7 +18,11 @@ import LGSideMenuController
  *
  * Functionality is provided by the 3rd party 'LGSideMenuController' CocoaPods package
  */
-class MainVC: LGSideMenuController {
+class MainVC: LGSideMenuController, GADBannerViewDelegate {
+    
+    var cview: UIView?
+    var bannerView: GADBannerView?
+    var bannerLoaded = false
     
     // The two contained view controllers
     var llvc: LanguageSelectionVC? // llvc is short for LanguageListViewController
@@ -35,8 +40,12 @@ class MainVC: LGSideMenuController {
      * splitViewController: Instance of UISplitViewController (this is the root view controller for the app)
      */
     init(menuView: UINavigationController, splitViewController: UISplitViewController) {
+        
         // Call parent initialiser, passing splitViewController as the root view controller for the app
         super.init(rootViewController: splitViewController)
+        
+        // Add the banner to the bottom of the view
+        insertBannerView()
         
         // Status bar fix
         self.leftViewStatusBarVisibleOptions = LGSideMenuStatusBarVisibleOptions.onAll
@@ -98,5 +107,83 @@ class MainVC: LGSideMenuController {
     // Hid the language list
     func hideLanguageList() {
         self.hideLeftView(animated: true, completionHandler: nil)
+    }
+    
+    // MARK: - ADVERTS
+    
+    /**
+     Add banner view to the bottom of the container
+      UNLESS they have disabled them
+     */
+    func insertBannerView() {
+        let product = Product.findBy(identifier: ProductRepo.DisableAds)
+        
+        // If the product has NOT been purchasaed, or does not exist, show the banner
+        if !(product?.purchased ?? false) {
+            // Ads not disabled, so create it and set it up
+            
+            bannerView = GADBannerView()
+//            bannerView!.frame.origin.y = rootViewController.view.frame.size.height
+            bannerView!.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView!.translatesAutoresizingMaskIntoConstraints = false
+            bannerView!.adSize = kGADAdSizeSmartBannerPortrait
+            bannerView!.rootViewController = self
+            bannerView!.delegate = self
+            
+            // Request add for the banner
+            let request: GADRequest = GADRequest()
+            request.testDevices = ["cd8fbfc74425189d3c4e7cb7ff317690"] // My iPhone
+            bannerView!.load(request)
+            
+            // Add to view
+            view.addSubview(bannerView!)
+            
+            view.layoutSubviews()
+        }
+    }
+    
+    /**
+     Remove banner view from superview
+     */
+    func removeBannerView() {
+        if bannerView != nil {
+            bannerView!.removeFromSuperview()
+            bannerLoaded = false
+            bannerView = nil
+            
+            // Update layout of other views now banner has been removed
+            view.layoutSubviews()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        updatePositions()
+    }
+    
+    func updatePositions() {
+        var origin: CGFloat = 0
+        
+        if bannerView != nil {
+            if bannerLoaded {
+                // Resize rootViewController to height - 50
+                origin = rootViewController.view.window!.frame.size.height - bannerView!.frame.size.height
+                rootViewController.view.frame.size.height = origin
+            } else {
+                // No banner loaded (yet)
+                rootViewController.view.frame.size.height = rootViewController.view.window!.frame.size.height
+            }
+            // Reposition and resize banner to be at bottom of rootViewController
+            bannerView!.frame.origin.y = origin
+            bannerView!.frame.size.width = rootViewController.view.frame.size.width
+        }
+    }
+    
+    // MARK: - GADBannerViewDelegate
+    
+    /// Tells the delegate an ad request loaded an ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
+        print("adViewDidReceiveAd: Banner loaded")
+        bannerLoaded = true
+        updatePositions()
     }
 }

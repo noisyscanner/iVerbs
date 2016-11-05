@@ -12,7 +12,7 @@ import RealmSwift
 
 public class ProductRepo {
     
-    static let DisableAds = "uk.co.bradreed.iverbs.ads"
+    static let DisableAds = "uk.co.bradreed.iverbs.ads1"
     
     static let productIdentifiers: Set<ProductIdentifier> = [ProductRepo.DisableAds]
     
@@ -51,6 +51,6 @@ public class ProductRepo {
     
 }
 
-func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+/*func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
     return productIdentifier.components(separatedBy: ".").last
-}
+}*/

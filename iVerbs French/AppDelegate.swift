@@ -22,12 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         splitViewController?.delegate = self
         splitViewController?.preferredDisplayMode = .allVisible
 
-        UINavigationBar.appearance().mixedBarTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkNav)
-//        UINavigationBar.appearance().mixedTintColor = MixedColor(normal: iVerbs.colour, night: iVerbs.Colour.darkNav)
+        UINavigationBar.appearance().mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkNav)
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.white
         ]
+        
+        let uibbi = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        uibbi.tintColor = UIColor.white
         
         // Add 'Speak' menu item
         let menu = UIMenuController.shared
@@ -50,10 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let langnc = storyboard.instantiateViewController(withIdentifier: "LanguageSelectionNC") as! UINavigationController
-//            let langview = langnc.viewControllers.first! as! LanguageSelectionVC
             
             let mainVC = MainVC(menuView: langnc, splitViewController: self.splitViewController!)
-//            mainVC.view.frame = CGRect(x: mainVC.view.frame.origin.x, y: mainVC.view.frame.origin.y, width: mainVC.view.frame.width, height: 500)
             
             self.window!.makeKeyAndVisible()
             self.window!.rootViewController = mainVC

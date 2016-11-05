@@ -23,7 +23,7 @@ class LanguageManager {
             group.enter()
             language.install { error in
                 if error != nil {
-                    print("Error installing Language '\(language.language)' - ", error)
+                    print("Error installing language '\(language.language)' - ", error!)
                 } else {
                     // Increment installed counter
                     print("Language installed: ", language.language)
@@ -49,13 +49,12 @@ class LanguageManager {
             if apiresponse.succeeded {
                 // Success
                 if let data = apiresponse.data {
-//                    debugPrint(data["data"])
                     if let languageDicts = data["data"] as? [[String: AnyObject]] {
                         var languages: [Language] = []
                         
                         var langIDs = [Int]()
                         
-                        // Loop language dictionaries and create new Language dict from each
+                        // Loop language dictionaries and create new Language from each
                         for languageDict in languageDicts {
                             let langID = languageDict["id"] as! Int
                             langIDs.append(langID)
@@ -63,20 +62,17 @@ class LanguageManager {
                             // If the language already exists in the local db, don't recreate it
                             let query = Language.allLanguages.filter("id = \(langID)")
                             if query.count == 0 {
-                                let language = Language(dict: languageDict)
-                                languages.append(language)
+                                if let language = Language(dict: languageDict) {
+                                    languages.append(language)
+                                }
                             } else {
                                 // If the language already exists, just update the version and save
-                                let language = query.first
-                                
-                                /*if let data = languageDict["data"] {
-                                    languageDict = data as! [String: AnyObject]
-                                }*/
+                                let language = query.first!
                                 
                                 let newVersion = languageDict["version"] as! Int
-                                if newVersion > language!.latestVersion {
+                                if newVersion > language.latestVersion {
                                     RealmManager.realmWrite { _ in
-                                        language!.latestVersion = newVersion
+                                        language.latestVersion = newVersion
                                     }
                                 }
                             }
@@ -93,14 +89,16 @@ class LanguageManager {
                         
                     } else {
                         // Invalid data from api
-                        print("Languages not received from API: ", apiresponse.data)
+                        print("Languages not received from API: ", data)
+                        // TODO: show error
                     }
 
                 }
                
             } else {
                 // Error
-                print("Error fetching language list: ", apiresponse.error)
+                print("Error fetching language list: ", apiresponse.error!)
+                // TODO: show error
             }
             
             onCompletion(apiresponse.error)

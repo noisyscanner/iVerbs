@@ -86,13 +86,22 @@ class SettingsController: UITableViewController, SettingsDelegate {
     // Called when a purchase has been made
     func purchased(_ notification: Notification) {
         hideSpinner()
-        showSpinner(text: "Purchase successful!\nThank you for supporting iVerbs.", interval: 1)
-        let setting = Setting.by(identifier: "iad")
-        setting?.flip()
         
+        // Hide the banner
+        if let lvc = navigationController?.viewControllers.first as? LanguageSelectionVC {
+            let mainVC = lvc.delegate
+            mainVC?.removeBannerView()
+        }
+        
+        
+        showSpinner(text: "Purchase successful!\nThank you for supporting iVerbs.", interval: 1)
     }
     
-    // Called when a purchase failed
+    /**
+     Called when a purchase failed
+     Shows a "Purchase Failed" notice and optionally an error message
+     Alert displays for 2 seconds, and then disappears before refreshing the table
+    */
     func failed(_ notification: Notification) {
         var errorText = "Purchase Failed\n"
         if notification.object != nil {
@@ -100,9 +109,10 @@ class SettingsController: UITableViewController, SettingsDelegate {
         }
         showSpinner(text: errorText, interval: 2)
         
-        tableView.reloadData() // Updates switches
+        tableView.reloadData() // Updates switches, TODO: neccesary?
     }
     
+    /// Shows a loading spinner overlaying the main view
     private func showSpinner(text: String) {
         SwiftSpinner.show(text)
     }
@@ -159,7 +169,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
         // Title for each setting group
         switch section {
         case 0:
-            return "Support iVerbs"
+            return productRepo.products.count > 0 ? "Support iVerbs" : nil
         case 1:
             return nil // No title
         case 2:
@@ -246,8 +256,12 @@ class SettingsController: UITableViewController, SettingsDelegate {
             ProductRepo.store.buyProduct(productModel: product)
         case 1:
             // IAP restore
-            showSpinner(text: "Restoring\nPlease wait...")
-            ProductRepo.store.restorePurchases()
+//            showSpinner(text: "Restoring\nPlease wait...")
+//            ProductRepo.store.restorePurchases()
+            if let lvc = navigationController?.viewControllers.first as? LanguageSelectionVC {
+                let mainVC = lvc.delegate
+                mainVC?.removeBannerView()
+            }
         case 3:
             // Link cell
             let link = links[indexPath.row]
