@@ -130,12 +130,10 @@ class VerbListController: UITableViewController, UISearchControllerDelegate, UIS
         tableView.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
         navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
         searchController.searchBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
-        
         searchController.searchBar.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
         
-        
         tableView.tintColor = iVerbs.Colour.lightBlue
-        tableView.sectionIndexBackgroundColor = UIColor.black
+        tableView.mixedSectionIndexBackgroundColor = MixedColor(normal: 0xF5F5F5, night: 0x0D0D0D)
         
         // Set up search controller
         searchController.searchResultsUpdater = self
