@@ -486,7 +486,7 @@
 		A2A1A2A11B2B01AA006E26C6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Brad Reed";
 				TargetAttributes = {
 					A2A1A2A81B2B01AA006E26C6 = {
@@ -851,7 +851,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FB45D34662F06F4194E169D0 /* Pods-iVerbs French.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -872,7 +872,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA0A3D605BECEA4E1E22415C /* Pods-iVerbs French.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -893,6 +893,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC615EEAA7D0125C4BD5DECA /* Pods-iVerbs FrenchTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -908,6 +909,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54445A78B37269044A66C9D0 /* Pods-iVerbs FrenchTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "iVerbs FrenchTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

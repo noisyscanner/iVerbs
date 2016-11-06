@@ -130,13 +130,13 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 
 - Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
 
-```bash
+  ```bash
 $ git init
 ```
 
 - Add Alamofire as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
 
-```bash
+  ```bash
 $ git submodule add https://github.com/Alamofire/Alamofire.git
 ```
 
@@ -158,7 +158,7 @@ $ git submodule add https://github.com/Alamofire/Alamofire.git
 
 - And that's it!
 
-> The `Alamofire.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
+  > The `Alamofire.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
 
 ---
 
@@ -240,7 +240,7 @@ The `response` handler does NOT evaluate any of the response data. It merely for
 Alamofire.request("https://httpbin.org/get").response { response in
     print("Request: \(response.request)")
     print("Response: \(response.response)")
-    print("Error: \(response.data)")
+    print("Error: \(response.error)")
 
     if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
     	print("Data: \(utf8Text)")
@@ -623,7 +623,7 @@ let destination: DownloadRequest.DownloadFileDestination = { _, _ in
 Alamofire.download(urlString, to: destination).response { response in
     print(response)
 
-	if response.result.isSuccess, let imagePath = response.destinationURL?.path {
+	if response.error == nil, let imagePath = response.destinationURL?.path {
 	    let image = UIImage(contentsOfFile: imagePath)
 	}
 }
@@ -671,6 +671,8 @@ Alamofire.download("https://httpbin.org/image/png")
 #### Resuming a Download
 
 If a `DownloadRequest` is cancelled or interrupted, the underlying URL session may generate resume data for the active `DownloadRequest`. If this happens, the resume data can be re-used to restart the `DownloadRequest` where it left off. The resume data can be accessed through the download response, then reused when trying to restart the request.
+
+> **IMPORTANT:** On the latest release of all the Apple platforms (iOS 10, macOS 10.12, tvOS 10, watchOS 3), `resumeData` is broken on background URL session configurations. There's an underlying bug in the `resumeData` generation logic where the data is written incorrectly and will always fail to resume the download. For more information about the bug and possible workarounds, please see this Stack Overflow [post](http://stackoverflow.com/a/39347461/1342462).
 
 ```swift
 class ImageRequestor {

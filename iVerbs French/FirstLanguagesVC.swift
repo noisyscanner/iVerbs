@@ -93,7 +93,7 @@ class FirstLanguagesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let language = languageForRowAtIndexPath(indexPath)
         
         // Set the textLabel of the cell to the name of the language
-        cell.textLabel!.text = language.language
+        cell.textLabel!.text = language.label
         
         return cell
         

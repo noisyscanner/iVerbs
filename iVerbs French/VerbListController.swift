@@ -129,6 +129,7 @@ class VerbListController: UITableViewController, UISearchControllerDelegate, UIS
         tableView.mixedBackgroundColor = mixedbg
         tableView.mixedSeparatorColor = MixedColor(normal: iVerbs.Colour.lightSep, night: iVerbs.Colour.darkSep)
         navigationController?.navigationBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
+        
         searchController.searchBar.mixedBarTintColor = MixedColor(normal: iVerbs.Colour.lightBlue, night: iVerbs.Colour.darkBlue)
         searchController.searchBar.mixedKeyboardAppearance = MixedKeyboardAppearance(normal: .light, night: .dark)
         
@@ -141,9 +142,6 @@ class VerbListController: UITableViewController, UISearchControllerDelegate, UIS
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        
-        
-//        reloadLanguage()
     }
 
     override func viewWillAppear(_ animated: Bool) {

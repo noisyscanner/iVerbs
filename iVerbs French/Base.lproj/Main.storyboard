@@ -68,10 +68,9 @@
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iux-oD-tdQ">
-                                                    <rect key="frame" x="262" y="40" width="30" height="41"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                    <state key="normal" title="⬆️">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="255" y="42" width="37" height="37"/>
+                                                    <state key="normal" image="download">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
                                                 </button>
                                             </subviews>
@@ -452,10 +451,11 @@
     </scenes>
     <resources>
         <image name="cog" width="22" height="22"/>
-        <image name="globe" width="22" height="22"/>
-        <image name="heartfilled" width="22" height="19"/>
-        <image name="reorder" width="22" height="22"/>
-        <image name="speaker" width="25" height="25"/>
+        <image name="download" width="37" height="37"/>
+        <image name="globe" width="24" height="24"/>
+        <image name="heartfilled" width="27" height="24"/>
+        <image name="reorder" width="37" height="37"/>
+        <image name="speaker" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Cai-YW-Uee"/>

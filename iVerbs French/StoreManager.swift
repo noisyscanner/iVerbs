@@ -202,8 +202,6 @@ extension StoreManager: SKPaymentTransactionObserver {
     private func complete(transaction: SKPaymentTransaction) {
         print("complete...")
         
-        // TODO: Validate receipt
-        
         deliverPurchaseNotification(for: transaction.payment.productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }

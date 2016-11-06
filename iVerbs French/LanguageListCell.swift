@@ -38,7 +38,9 @@ class LanguageListCell: iVerbsTintedCell {
     @IBOutlet weak var btnUpdate: UIButton! // Update/Download button
     
     override func awakeFromNib() {
-        lblLanguage.mixedTextColor = MixedColor(normal: UIColor.darkText, night: UIColor.white)
+        let mixed = MixedColor(normal: UIColor.darkText, night: UIColor.white)
+        lblLanguage.mixedTextColor = mixed
+        btnUpdate.mixedTintColor = mixed
     }
     
     // Language instance, or nil or the cell has not been initialised yet
@@ -96,7 +98,6 @@ class LanguageListCell: iVerbsTintedCell {
             
             // Set button and label text
             lblUpdate?.text = "Update Available: " + dateString
-            btnUpdate.setTitle("⬆️", for: UIControlState())
             
             // Show the button and update label
             btnUpdate.showView()
@@ -110,9 +111,6 @@ class LanguageListCell: iVerbsTintedCell {
         case .notInstalled:
             // Language not installed.
             // It is available for download
-            
-            // Set button title
-            btnUpdate.setTitle("⬇️", for: UIControlState())
             
             // Show the update button but hide the update label
             btnUpdate.showView()

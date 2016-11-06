@@ -132,7 +132,7 @@ class MainVC: LGSideMenuController, GADBannerViewDelegate {
             
             // Request add for the banner
             let request: GADRequest = GADRequest()
-            request.testDevices = ["cd8fbfc74425189d3c4e7cb7ff317690"] // My iPhone
+            request.testDevices = ["cd8fbfc74425189d3c4e7cb7ff317690", kGADSimulatorID] // My iPhone
             bannerView!.load(request)
             
             // Add to view
@@ -181,7 +181,7 @@ class MainVC: LGSideMenuController, GADBannerViewDelegate {
     // MARK: - GADBannerViewDelegate
     
     /// Tells the delegate an ad request loaded an ad.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("adViewDidReceiveAd: Banner loaded")
         bannerLoaded = true
         updatePositions()

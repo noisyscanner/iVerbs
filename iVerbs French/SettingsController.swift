@@ -93,7 +93,6 @@ class SettingsController: UITableViewController, SettingsDelegate {
             mainVC?.removeBannerView()
         }
         
-        
         showSpinner(text: "Purchase successful!\nThank you for supporting iVerbs.", interval: 1)
     }
     
@@ -108,8 +107,6 @@ class SettingsController: UITableViewController, SettingsDelegate {
             errorText += notification.object as! String
         }
         showSpinner(text: errorText, interval: 2)
-        
-        tableView.reloadData() // Updates switches, TODO: neccesary?
     }
     
     /// Shows a loading spinner overlaying the main view
@@ -135,33 +132,47 @@ class SettingsController: UITableViewController, SettingsDelegate {
         if productRepo.products.count > 0 {
             return 4
         } else {
-            return 3 // No need for the IAP section
+            return 2 // No need for the IAP sections
         }
         
         
         // Sections: "EXTRAS" (aka purchases), "Restore and Donate", "Settings", "Links"
-        
-//        return SettingManager.sharedInstance.groupCount
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Number of settings in a group
-        switch section {
-        case 0:
-            // SECTION 1: EXTRAS
-            return productRepo.products.count // Return number of purchasable products, or zero by default
-        case 1:
-            // SECTION 2: Restore purchases (and promo code TODO)
-            return 1
-        case 2:
-            // SECTION 3: SETTINGS
-            return manager.settings.count
-        case 3:
-            // SECTION 4: LINKS
-            return links.count
-        default:
-            return 0
+        
+        if productRepo.products.count > 0 {
+            switch section {
+            case 0:
+                // SECTION 1: EXTRAS
+                return productRepo.products.count // Return number of purchasable products, or zero by default
+            case 1:
+                // SECTION 2: Restore purchases (and promo code TODO)
+                return 1
+            case 2:
+                // SECTION 3: SETTINGS
+                return manager.settings.count
+            case 3:
+                // SECTION 4: LINKS
+                return links.count
+            default:
+                return 0
+            }
+        } else {
+            switch section {
+            case 0:
+                // SECTION 3: SETTINGS
+                return manager.settings.count
+            case 1:
+                // SECTION 4: LINKS
+                return links.count
+            default:
+                return 0
+            }
         }
+        
+        
 //        return settings[section].settings.count
     }
     
@@ -169,7 +180,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
         // Title for each setting group
         switch section {
         case 0:
-            return productRepo.products.count > 0 ? "Support iVerbs" : nil
+            return productRepo.products.count > 0 ? "Support iVerbs" : "Settings"
         case 1:
             return nil // No title
         case 2:
@@ -199,7 +210,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell
         
-        if indexPath.section == 0 {
+        if productRepo.products.count > 0 && indexPath.section == 0 {
             // Support iVerbs cells, AKA Disable Adverts
             let iadCell = tableView.dequeueReusableCell(withIdentifier: "IapSettingCell", for: indexPath) as! IapSettingCell
             
@@ -208,7 +219,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
             
             cell = iadCell
             
-        } else if indexPath.section == 2 {
+        } else if productRepo.products.count > 0 && indexPath.section == 2 || productRepo.products.count == 0 && indexPath.section == 0 {
             // Settings
             
             let setting = self.tableView(tableView, settingForRowAtIndexPath: indexPath)
@@ -227,7 +238,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
             // Web links and the restore purchase thing
             cell = tableView.dequeueReusableCell(withIdentifier: "LinkCell", for: indexPath) as! iVerbsTintedCell
             
-            if indexPath.section == 1 {
+            if productRepo.products.count > 0 && indexPath.section == 1 {
                 // iap restore
                 if indexPath.row == 0 {
                     // Restore purchases
@@ -235,7 +246,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
 //                } else if indexPath.row == 1 {
                     // Promo code
                 }
-            } else if indexPath.section == 3 {
+            } else if productRepo.products.count > 0 && indexPath.section == 3 || productRepo.products.count == 0 && indexPath.section == 1 {
                 // Web links
                 cell.textLabel?.text = links[indexPath.row]
             }
@@ -259,8 +270,7 @@ class SettingsController: UITableViewController, SettingsDelegate {
 //            showSpinner(text: "Restoring\nPlease wait...")
 //            ProductRepo.store.restorePurchases()
             if let lvc = navigationController?.viewControllers.first as? LanguageSelectionVC {
-                let mainVC = lvc.delegate
-                mainVC?.removeBannerView()
+                lvc.delegate?.removeBannerView()
             }
         case 3:
             // Link cell
