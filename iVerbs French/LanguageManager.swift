@@ -90,7 +90,6 @@ class LanguageManager {
                     } else {
                         // Invalid data from api
                         print("Languages not received from API: ", data)
-                        // TODO: show error
                     }
 
                 }
@@ -98,7 +97,6 @@ class LanguageManager {
             } else {
                 // Error
                 print("Error fetching language list: ", apiresponse.error!)
-                // TODO: show error
             }
             
             onCompletion(apiresponse.error)

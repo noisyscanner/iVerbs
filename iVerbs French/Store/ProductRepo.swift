@@ -12,7 +12,8 @@ import RealmSwift
 
 public class ProductRepo {
     
-    static let DisableAds = "uk.co.bradreed.iverbs.ads1"
+//    static let DisableAds = "uk.co.bradreed.iverbs.ads1"
+    static let DisableAds = "co.uk.iverbs.iVerbs.disableIAds"
     
     static let productIdentifiers: Set<ProductIdentifier> = [ProductRepo.DisableAds]
     

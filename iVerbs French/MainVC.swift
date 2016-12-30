@@ -124,7 +124,7 @@ class MainVC: LGSideMenuController, GADBannerViewDelegate {
             
             bannerView = GADBannerView()
 //            bannerView!.frame.origin.y = rootViewController.view.frame.size.height
-            bannerView!.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            bannerView!.adUnitID = "ca-app-pub-5636867304702563/5051362154"
             bannerView!.translatesAutoresizingMaskIntoConstraints = false
             bannerView!.adSize = kGADAdSizeSmartBannerPortrait
             bannerView!.rootViewController = self
